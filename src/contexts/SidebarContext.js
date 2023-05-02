@@ -12,7 +12,7 @@ const SidebarProvider = ({children}) => {
   }
   return (
 <SidebarContext.Provider
- value={{isOpen , handleClose}}
+ value={{isOpen , handleClose, setIsOpen}}
 >
   {children}
 </SidebarContext.Provider>
