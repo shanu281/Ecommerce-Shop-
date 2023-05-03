@@ -10,7 +10,7 @@ import { CartContext } from '../contexts/CartContext';
 const Sidebar = () => {
   const {isOpen, setIsOpen , handleClose} = useContext(SidebarContext)
   const {cart, addToCart} = useContext(CartContext)
-console.log(cart)
+
   return (
     <div className={`${isOpen ? 'right-0' : '-right-full'} w-full bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px]`}>
     <div className='flex items-center justify-between py-6 border-b '>
