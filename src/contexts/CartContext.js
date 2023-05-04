@@ -8,7 +8,7 @@ const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
  
   // Add to Cart
-  const addToCart = (id, product) => {
+  const addToCart = (product, id) => {
     const newItems = {...product, quantity:1}
   // Check if the item is already in the cart or not
     const cartItem = cart.find(item => {
@@ -44,33 +44,34 @@ const CartProvider = ({ children }) => {
     }
 
    //Increase Quantity
-   const increaseQuantity = (id) => {
-    const cartItem = cart.find((item) =>  item.id === id);
-      addToCart(cartItem, id);
+   const increaseAmount = (id) => {
+    const item = cart.find((e) =>  e.id === id);
+      addToCart(item, id);
+      console.log(item)
       }
 
    //Decrease quantity
-   const decreaseQuantity = (id) => {
+   const decreaseAmount = (id) => {
     const cartItem = cart.find((item) => {
-      return item.id=== id
-    })
+      return item.id === id
+    });
     if(cartItem){
-      const newCart = cart.map(item => {
+      const newCart = cart.map((item) => {
         if(item.id === id){
-          return {...item , quantity: cartItem.quantity-1}
-        }else {
+          return { ...item , quantity: cartItem.quantity - 1}
+        } else {
           return item; 
         }
-      })
-      setCart(cartItem)
-    }else {
-      if(cart.quantity < 2){
-        removeFromCart(id)
+      });
+      setCart(newCart);
+    } 
+      if(cartItem.quantity < 2){
+        removeFromCart(id )
       }
-    }
+    
   }
   return (
-    <CartContext.Provider value={{ cart , addToCart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity}}>{children}</CartContext.Provider>
+    <CartContext.Provider value={{ cart , addToCart, removeFromCart, clearCart, increaseAmount, decreaseAmount}}>{children}</CartContext.Provider>
   );
 };
 
